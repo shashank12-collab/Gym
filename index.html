@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FitZone Gym - Login</title>
+  <link rel="stylesheet" href="./styles/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="login-page">
+  <div class="login-container">
+    <div class="login-background"></div>
+    <div class="login-content">
+      <div class="login-form-container">
+        <div class="logo-section">
+          <h1 class="logo">FitZone</h1>
+          <p class="tagline">Your Fitness Journey Starts Here</p>
+        </div>
+
+        <form class="login-form" id="loginForm">
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+          </div>
+
+          <div class="form-options">
+            <label class="checkbox-container">
+              <input type="checkbox" id="remember">
+              <span class="checkmark"></span>
+              Remember me
+            </label>
+            <a href="#" class="forgot-password">Forgot Password?</a>
+          </div>
+
+          <button type="submit" class="login-btn">Login to Dashboard</button>
+        </form>
+
+        <div class="login-footer">
+          <p>&copy; 2025 FitZone Gym Management System</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Load firebase config module first -->
+  <script type="module" src="./scripts/firebase-config.js"></script>
+
+  <script type="module">
+    import { login } from './scripts/auth.js';
+
+    // Add all admin emails here (lowercase). You can add multiple.
+    const adminEmails = [
+      'admin@example.com',
+      'shashanksingh56074@gmail.com'
+    ];
+
+    document.getElementById('loginForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const emailInput = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      const user = await login(emailInput, password);
+      if (user) {
+        const loggedInEmail = (user.email || '').trim().toLowerCase();
+        if (adminEmails.includes(loggedInEmail)) {
+          window.location.href = 'admin.html';
+        } else {
+          window.location.href = 'member.html';
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>

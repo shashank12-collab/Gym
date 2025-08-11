@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Bill - FitZone Gym</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="dashboard-page">
+<header class="navbar">
+    <div class="navbar-content">
+        <div class="navbar-left">
+            <h2 class="logo">FitZone</h2>
+        </div>
+        <div class="navbar-right">
+            <div class="admin-info">
+                <span class="admin-name">Shashank</span>
+                <span class="admin-role">Administrator</span>
+            </div>
+            <button class="logout-btn" onclick="window.location.href='index.html'">Logout</button>
+        </div>
+    </div>
+</header>
+
+<div class="dashboard-container">
+    <aside class="sidebar">
+        <nav class="sidebar-nav">
+            <ul class="nav-menu">
+                <li class="nav-item "><a href="dashboard.html" class="nav-link"><span class="nav-icon">📊</span>Dashboard</a></li>
+                <li class="nav-item "><a href="add-member.html" class="nav-link"><span class="nav-icon">👥</span>Add Member</a></li>
+                <li class="nav-item "><a href="view-members.html" class="nav-link"><span class="nav-icon">👁️</span>View Members</a></li>
+                <li class="nav-item active"><a href="create-bill.html" class="nav-link"><span class="nav-icon">💳</span>Create Bill</a></li>
+                <li class="nav-item "><a href="assign-package.html" class="nav-link"><span class="nav-icon">📦</span>Assign Package</a></li>
+                <li class="nav-item "><a href="notifications.html" class="nav-link"><span class="nav-icon">🔔</span>Notifications</a></li>
+                <li class="nav-item "><a href="reports.html" class="nav-link"><span class="nav-icon">📈</span>Reports</a></li>
+            </ul>
+        </nav>
+    </aside>
+    <main class="main-content">
+        
+<section class="content-section active">
+    <div class="section-header"><h2>Create Bill</h2><p>Generate billing for members</p></div>
+    <div class="form-card">
+        <form class="bill-form">
+            <div class="form-row"><div class="form-group"><label for="billMember">Select Member</label><select id="billMember" name="billMember" required><option value="">Choose Member</option></select></div><div class="form-group"><label for="billAmount">Amount</label><input type="number" id="billAmount" name="billAmount" step="0.01" required></div></div>
+            <div class="form-row"><div class="form-group"><label for="billType">Bill Type</label><select id="billType" name="billType" required><option value="">Select Type</option><option value="membership">Membership Fee</option></select></div><div class="form-group"><label for="dueDate">Due Date</label><input type="date" id="dueDate" name="dueDate" required></div></div>
+            <div class="form-group"><label for="billDescription">Description</label><textarea id="billDescription" name="billDescription" rows="3"></textarea></div>
+            <div class="form-actions"><button type="submit" class="btn btn-primary">Generate Bill</button><button type="reset" class="btn btn-secondary">Clear</button></div>
+        </form>
+    </div>
+</section>
+
+    </main>
+</div>
+
+<script type="module" src="./scripts/firebase-config.js"></script>
+<script type="module" src="./scripts/auth.js"></script>
+<!-- <script type="module" src="./scripts/admin.js"></script> -->
+
+
+<script type="module">
+    import { db } from './scripts/firebase-config.js';
+    import { collection, getDocs } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js";
+    import { addBill } from './scripts/admin.js';
+
+    // Load members into dropdown
+    async function loadMembersDropdown() {
+        const memberSelect = document.getElementById('billMember');
+        memberSelect.innerHTML = '<option value="">Choose Member</option>'; // reset
+
+        const querySnapshot = await getDocs(collection(db, "members"));
+        querySnapshot.forEach(docSnap => {
+            const member = docSnap.data();
+            const option = document.createElement("option");
+            option.value = docSnap.id; // Member ID
+            option.textContent = `${member.name} (${docSnap.id})`;
+            memberSelect.appendChild(option);
+        });
+    }
+
+    // Handle bill form submit
+    document.querySelector('.bill-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const memberId = document.getElementById('billMember').value;
+        const amount = parseFloat(document.getElementById('billAmount').value);
+        const billType = document.getElementById('billType').value;
+        const dueDate = document.getElementById('dueDate').value;
+        const description = document.getElementById('billDescription').value;
+
+        await addBill(memberId, amount, billType, dueDate, description);
+        e.target.reset();
+    });
+
+    // Load members on page load
+    document.addEventListener("DOMContentLoaded", loadMembersDropdown);
+</script>
+
+
+
+</body>
+</html>

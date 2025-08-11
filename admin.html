@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - FitZone Gym</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="dashboard-page">
+    <header class="navbar">
+        <div class="navbar-content">
+            <div class="navbar-left">
+                <h2 class="logo">FitZone</h2>
+            </div>
+            <div class="navbar-right">
+                <div class="admin-info">
+                    <span class="admin-name">Shashank</span>
+                    <span class="admin-role">Administrator</span>
+                </div>
+                <button class="logout-btn" onclick="window.location.href='index.html'">Logout</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <ul class="nav-menu">
+                    <li class="nav-item active">
+                        <a href="dashboard.html" class="nav-link" data-section="dashboard">
+                            <span class="nav-icon">📊</span>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="add-member.html" class="nav-link" data-section="add-member">
+                            <span class="nav-icon">👥</span>
+                            Add Member
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="view-members.html" class="nav-link" data-section="view-members">
+                            <span class="nav-icon">👁️</span>
+                            View Members
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="create-bill.html" class="nav-link" data-section="create-bill">
+                            <span class="nav-icon">💳</span>
+                            Create Bill
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="assign-package.html" class="nav-link" data-section="assign-package">
+                            <span class="nav-icon">📦</span>
+                            Assign Package
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="notifications.html" class="nav-link" data-section="notifications">
+                            <span class="nav-icon">🔔</span>
+                            Notifications
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="reports.html" class="nav-link" data-section="reports">
+                            <span class="nav-icon">📈</span>
+                            Reports
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="content-section active">
+                <div class="section-header">
+                    <h2>Dashboard Overview</h2>
+                    <p>Welcome back, Administrator</p>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-info">
+                            <h3>4</h3>
+                            <p>Active Members</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">💰</div>
+                        <div class="stat-info">
+                            <h3>$15,420</h3>
+                            <p>Monthly Revenue</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📅</div>
+                        <div class="stat-info">
+                            <h3>2</h3>
+                            <p>New Members</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⚡</div>
+                        <div class="stat-info">
+                            <h3>95%</h3>
+                            <p>Equipment Uptime</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Add Member Section -->
+            <section id="add-member" class="content-section">
+                <div class="section-header">
+                    <h2>Add New Member</h2>
+                    <p>Register a new gym member</p>
+                </div>
+                
+                <div class="form-card">
+                    <form class="member-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name</label>
+                                <input type="text" id="firstName" name="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" id="lastName" name="lastName" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="memberEmail">Email</label>
+                                <input type="email" id="memberEmail" name="memberEmail" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="membershipType">Membership Type</label>
+                                <select id="membershipType" name="membershipType" required>
+                                    <option value="">Select Package</option>
+                                    <option value="basic">Basic - $30/month</option>
+                                    <option value="premium">Premium - $50/month</option>
+                                    <option value="vip">VIP - $80/month</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="joinDate">Join Date</label>
+                                <input type="date" id="joinDate" name="joinDate" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Add Member</button>
+                            <button type="reset" class="btn btn-secondary">Reset Form</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- View Members Section -->
+            <section id="view-members" class="content-section">
+                <div class="section-header">
+                    <h2>All Members</h2>
+                    <p>Manage existing gym members</p>
+                </div>
+                
+                <div class="table-container">
+                    <div class="table-actions">
+                        <input type="search" placeholder="Search members..." class="search-input">
+                        <select class="filter-select">
+                            <option value="">All Members</option>
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                            <option value="expired">Expired</option>
+                        </select>
+                    </div>
+                    
+                    <table class="data-table" id="membersTable">
+                        <thead>
+                            <tr>
+                                <th>Member ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Package</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Create Bill Section -->
+            <section id="create-bill" class="content-section">
+                <div class="section-header">
+                    <h2>Create Bill</h2>
+                    <p>Generate billing for members</p>
+                </div>
+                
+                <div class="form-card">
+                    <form class="bill-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="billMember">Select Member</label>
+                                <select id="billMember" name="billMember" required>
+                                    <option value="">Choose Member</option>
+                                    <option value="M001">Alice Johnson (M001)</option>
+                                    <option value="M002">Bob Smith (M002)</option>
+                                    <option value="M003">Carol Davis (M003)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="billAmount">Amount</label>
+                                <input type="number" id="billAmount" name="billAmount" step="0.01" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="billType">Bill Type</label>
+                                <select id="billType" name="billType" required>
+                                    <option value="">Select Type</option>
+                                    <option value="membership">Membership Fee</option>
+                                    <option value="personal-training">Personal Training</option>
+                                    <option value="equipment-rental">Equipment Rental</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="dueDate">Due Date</label>
+                                <input type="date" id="dueDate" name="dueDate" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="billDescription">Description</label>
+                            <textarea id="billDescription" name="billDescription" rows="3" placeholder="Enter bill details..."></textarea>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Generate Bill</button>
+                            <button type="reset" class="btn btn-secondary">Clear</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Other sections would be implemented similarly -->
+            <section id="assign-package" class="content-section">
+                <div class="section-header">
+                    <h2>Assign Package</h2>
+                    <p>Assign membership packages to members</p>
+                </div>
+                <div class="placeholder-content">
+                    <p>Package assignment functionality coming soon...</p>
+                </div>
+            </section>
+
+            <section id="notifications" class="content-section">
+                <div class="section-header">
+                    <h2>Notifications</h2>
+                    <p>Manage system notifications</p>
+                </div>
+                <div class="placeholder-content">
+                    <p>Notification management functionality coming soon...</p>
+                </div>
+            </section>
+
+            <section id="reports" class="content-section">
+                <div class="section-header">
+                    <h2>Reports</h2>
+                    <p>View detailed analytics and reports</p>
+                </div>
+                <div class="placeholder-content">
+                    <p>Reports and analytics functionality coming soon...</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+
+
+<script type="module">
+    import { addMember, loadMembers } from './scripts/admin.js';
+
+    // Add Member Form Submit
+    document.querySelector('.member-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const firstName = document.getElementById('firstName').value.trim();
+        const lastName = document.getElementById('lastName').value.trim();
+        const email = document.getElementById('memberEmail').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const membershipType = document.getElementById('membershipType').value;
+        const joinDate = document.getElementById('joinDate').value;
+
+        await addMember(`${firstName} ${lastName}`, email, membershipType, phone, joinDate);
+        e.target.reset();
+        await loadMembers(); // Refresh table
+    });
+
+    // Load Members on Page Load
+    document.addEventListener("DOMContentLoaded", () => {
+        loadMembers();
+    });
+</script>
+
+<script type="module" src="./scripts/firebase-config.js"></script>
+<script type="module" src="./scripts/auth.js"></script>
+
+
+
+
+
+
+</body>
+</html>
